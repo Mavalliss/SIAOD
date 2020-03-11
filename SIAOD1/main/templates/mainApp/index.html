@@ -14,9 +14,9 @@
             <h1>Входной массив</h1>
             <form action="" method="post">
                 {% csrf_token %}
-                <input type="text" id="txtIn" class="form-control" name="key" placeholder="Введите массив">
-                <!--                <textarea name="text" id="txtIn" class="form-control" cols="50" rows="10" name="key"-->
-                <!--                          placeholder="Введите массив"></textarea>-->
+                <!--                <input type="text" id="txtIn" class="form-control" name="inputarray" placeholder="Введите массив">-->
+                <textarea id="txtIn" class="form-control" cols="50" rows="10" name="inputarray"
+                          placeholder="Введите массив"></textarea>
                 <input type="submit" name="send" value="Добавить" class="mt-2 btn btn-danger">
             </form>
         </div>
@@ -26,13 +26,19 @@
             <div class="alert alert-info">
                 <div class="row">
                     <div class="col-900">
-                        <b>Исходный массив:</b> {{ main_arr }}<br>
+                        <b>Исходный массив:</b><br>
+                        <script>document.write({{ main_arr|safe }})</script>
+                        <br>
                         {% if j == 's' %}
-                        <b>Отсортированный:</b> {{ res_arr_shell }}<br>
+                        <b>Отсортированный:</b><br>
+                        <script>document.write({{ res_arr_shell|safe }})</script>
+                        <br>
                         <b>Время затрачено:</b> {{ time_shell }}
                         {% endif %}
                         {% if j == 'q' %}
-                        <b>Отсортированный:</b> {{ res_arr_quick }}<br>
+                        <b>Отсортированный:</b><br>
+                        <script>document.write({{ res_arr_quick|safe }})</script>
+                        <br>
                         <b>Время затрачено:</b> {{ time_shell }}
                         {% endif %}
                     </div>

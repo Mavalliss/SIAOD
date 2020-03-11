@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from .treatment import Shell, QuickSort
-from .models import Data
 
 
 # Create your views here.
@@ -9,14 +8,36 @@ def index(request):
     arr = []
     contex = None
     if request.method == "POST":
-        mobile_number = request.POST.get('key')
+        mobile_number = request.POST.get('inputarray')
+
+        mobile_number = mobile_number.split('\r\n')
         # print(mobile_number)
+        shellsort = []
+        quicksort = []
+        for i in mobile_number:
+            # print(list(map(int, i.replace(" ", ""))))
+            shellsort.append(i)
+            quicksort.append(i)
+
+        for i in range(0, shellsort.__len__(), 1):
+            print(shellsort[i])
+            print(list(map(int, shellsort[i].replace(" ", ""))))
+            shellsort[i] = Shell(list(map(int, shellsort[i].replace(" ", ""))))
+            print(shellsort[i])
+
         mobile_number = map(int, mobile_number.split())
         for i in mobile_number:
+            print(i)
             if i != " ":
                 arr.append(i)
-        shellsort = arr.copy()
-        quicksort = arr.copy()
+            if i == "\r\n":
+                arr.append("\n")
+
+        # print(arr)
+
+        # shellsort = arr.copy()
+        # quicksort = arr.copy()
+
         Shell(shellsort)
         QuickSort(quicksort, 0, arr.__len__() - 1)
         time1 = 0
