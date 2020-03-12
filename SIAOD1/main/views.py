@@ -21,11 +21,12 @@ def index(request):
 
         for i in range(0, shellsort.__len__(), 1):
             print(shellsort[i])
-            print(list(map(int, shellsort[i].replace(" ", ""))))
-            shellsort[i] = Shell(list(map(int, shellsort[i].replace(" ", ""))))
+            # print(list(map(int, shellsort[i].replace(" ", ""))))
+            print([int(i) for i in shellsort[i].split(' ')])
+            shellsort[i] = Shell([int(i) for i in shellsort[i].split(' ')])
             print(shellsort[i])
 
-        mobile_number = map(int, mobile_number.split())
+        # mobile_number = map(int, mobile_number.split())
         for i in mobile_number:
             print(i)
             if i != " ":
@@ -42,6 +43,7 @@ def index(request):
         QuickSort(quicksort, 0, arr.__len__() - 1)
         time1 = 0
         time2 = 0
+        # arr.append('\n')
         contex = {
             'main_arr': arr,
             'res_arr_shell': shellsort,
