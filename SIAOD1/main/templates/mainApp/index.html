@@ -14,9 +14,9 @@
             <h1>Входной массив</h1>
             <form action="" method="post">
                 {% csrf_token %}
-                                <input type="text" id="txtIn" class="form-control" name="inputarray" placeholder="Введите массив">
-<!--                <textarea id="txtIn" class="form-control" cols="50" rows="10" name="inputarray"-->
-<!--                          placeholder="Введите массив"></textarea>-->
+                <!--                                <input type="text" id="txtIn" class="form-control" name="inputarray" placeholder="Введите массив">-->
+                <textarea id="txtIn" class="form-control" cols="50" rows="10" name="inputarray"
+                          placeholder="Введите массив"></textarea>
                 <input type="submit" name="send" value="Добавить" class="mt-2 btn btn-danger">
             </form>
         </div>
@@ -27,17 +27,19 @@
                 <div class="row">
                     <div class="col-900">
                         <b>Исходный массив:</b><br>
-                        <script>document.write({{ main_arr|safe }})</script>
+                        <script>document.write("MAIN ARR: " + {{ main_arr|safe }})</script>
                         <br>
-                        {% if j == 's' %}
+                        {% if j == 's' %}<!-- если q, то shellsort(почему - без понятия)-->
                         <b>Отсортированный:</b><br>
-                        <script>document.write({{ res_arr_shell|safe }})</script>
+                        <script>document.write("SHELLSORT: " + {{ res_arr_shell|safe }})</script>
+                        <!--                        {{ res_arr_shell }}-->
                         <br>
                         <b>Время затрачено:</b> {{ time_shell }}
                         {% endif %}
                         {% if j == 'q' %}
                         <b>Отсортированный:</b><br>
-                        <script>document.write({{ res_arr_quick|safe }})</script>
+                        <script>document.write("QUICKSORT: " + {{ res_arr_quick|safe }})</script>
+                        <!--                        {{ res_arr_quick }}-->
                         <br>
                         <b>Время затрачено:</b> {{ time_shell }}
                         {% endif %}
