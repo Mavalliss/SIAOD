@@ -1,4 +1,5 @@
 from datetime import datetime
+import random
 
 
 def Shell(seq):
@@ -45,6 +46,29 @@ def QuickSort(arr, low, high):
         QuickSort(arr, pi + 1, high)
 
 
-data = [22, 7, 2, -5, 8, 4]
-Shell(data)
-# print data  # [-5, 2, 4, 7, 8, 22]
+def quickSort(nums):
+    if len(nums) <= 1:
+        return nums
+    else:
+        q = random.choice(nums)
+        s_nums = []
+        m_nums = []
+        e_nums = []
+        for n in nums:
+            if n < q:
+                s_nums.append(n)
+            elif n > q:
+                m_nums.append(n)
+            else:
+                e_nums.append(n)
+        return quickSort(s_nums) + e_nums + quickSort(m_nums)
+
+
+def join(string):
+    return ''.join(map(str, string)).replace('][', '\n').replace('[', '').replace(']', '')
+
+
+# data = [22, 7, 2, -5, 8, 4]
+# new = quicksort(data)
+# # print data  # [-5, 2, 4, 7, 8, 22]
+# print(new)

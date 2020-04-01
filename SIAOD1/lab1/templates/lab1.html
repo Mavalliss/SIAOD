@@ -1,0 +1,39 @@
+{% extends "mainApp/index.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-5">
+            <h1>Входной массив</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <textarea id="txtIn" class="form-control" cols="50" rows="10" name="inputarray"
+                          placeholder="Введите массив"></textarea>
+                <input type="submit" name="send" value="Добавить" class="mt-2 btn btn-danger">
+            </form>
+        </div>
+        <div class="col-5 offset-1">
+            <h1>Выходной массив: </h1>
+            {% for j in i %}
+            <div class="alert alert-info">
+                <div class="row">
+                    <div class="col-900">
+                        <b>Исходный массив:</b><br>
+                        {{ main_arr|linebreaks }}
+                        {% if j == 's' %}<!-- если q, то shellsort(почему - без понятия)-->
+                        <b>Shellsort:</b><br>
+                        {{ res_arr_shell|linebreaks }}
+                        <b>Время затрачено:</b> {{ time_shell }}
+                        {% endif %}
+                        {% if j == 'q' %}
+                        <b>QuickSort:</b><br>
+                        {{ res_arr_quick|linebreaks }}
+                        <b>Время затрачено:</b> {{ time_shell }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

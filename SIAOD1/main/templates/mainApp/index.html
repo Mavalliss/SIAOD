@@ -4,50 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Погодное приложение</title>
+    <title>СИАОД</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-5">
-            <h1>Входной массив</h1>
-            <form action="" method="post">
-                {% csrf_token %}
-                <!--                                <input type="text" id="txtIn" class="form-control" name="inputarray" placeholder="Введите массив">-->
-                <textarea id="txtIn" class="form-control" cols="50" rows="10" name="inputarray"
-                          placeholder="Введите массив"></textarea>
-                <input type="submit" name="send" value="Добавить" class="mt-2 btn btn-danger">
-            </form>
-        </div>
-        <div class="col-5 offset-1">
-            <h1>Выходной массив: </h1>
-            {% for j in i %}
-            <div class="alert alert-info">
-                <div class="row">
-                    <div class="col-900">
-                        <b>Исходный массив:</b><br>
-                        <script>document.write("MAIN ARR: " + {{ main_arr|safe }})</script>
-                        <br>
-                        {% if j == 's' %}<!-- если q, то shellsort(почему - без понятия)-->
-                        <b>Отсортированный:</b><br>
-                        <script>document.write("SHELLSORT: " + {{ res_arr_shell|safe }})</script>
-                        <!--                        {{ res_arr_shell }}-->
-                        <br>
-                        <b>Время затрачено:</b> {{ time_shell }}
-                        {% endif %}
-                        {% if j == 'q' %}
-                        <b>Отсортированный:</b><br>
-                        <script>document.write("QUICKSORT: " + {{ res_arr_quick|safe }})</script>
-                        <!--                        {{ res_arr_quick }}-->
-                        <br>
-                        <b>Время затрачено:</b> {{ time_shell }}
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <a href="/" class="mr-md-auto text-dark">СИАОД</a>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a href="/lab1/" class="p-2 text-dark">Лабораторная 1</a>
+        <a href="/lab2/" class="p-2 text-dark">Лабораторная 2</a>
+        <a href="/lab3/" class="p-2 text-dark">Лабораторная 3</a>
+    </nav>
+    <a href="/admin/" class="btn btn-outline-primary" href="#">Admin</a>
+</div>
+{% block content %}
+{% endblock %}
 </body>
 </html>
