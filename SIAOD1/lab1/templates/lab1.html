@@ -1,5 +1,31 @@
 {% extends "mainApp/index.html" %}
 {% block content %}
+<script>
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+    function readFile(object) {
+    var file = object.files[0]
+    var reader = new FileReader()
+    reader.onload = function() {
+        document.getElementById('txtIn').innerHTML = reader.result
+    }
+    reader.readAsText(file)
+}
+
+function randomMe() {
+var randomstr = ""
+for (var i = 0; i < getRandomInt(30); i++) {
+    randomstr += getRandomInt(100) + " "
+    if (getRandomInt(2) == 1) {
+        randomstr = randomstr.slice(0, -1)
+        randomstr += "\n"
+    }
+}
+randomstr = randomstr.slice(0, -1)
+document.getElementById('txtIn').innerHTML = randomstr
+}
+</script>
 <div class="container mt-5">
     <div class="row">
         <div class="col-5">
@@ -7,11 +33,24 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <textarea id="txtIn" class="form-control" cols="50" rows="10" name="inputarray"
-                          placeholder="Введите массив"></textarea>
+                          placeholder="Введите массив">{{ random }}</textarea>
                 <input type="submit" name="send" value="Добавить" class="mt-2 btn btn-danger">
+                <aa class="mt-2 btn btn-primary" name="hello" value="Рандом" type="submit" onclick="randomMe()">Рандом
+                </aa>
             </form>
+            <br>
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="fileIn">
+                    <label class="custom-file-label" for="fileIn">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" onclick="readFile(document.getElementById('fileIn'))">Upload
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="col-5 offset-1">
+        <div class="col-66 offset-1">
             <h1>Выходной массив: </h1>
             {% for j in i %}
             <div class="alert alert-info">

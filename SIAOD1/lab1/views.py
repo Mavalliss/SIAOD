@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .treatment import Shell, quickSort, join
 import time
 from datetime import timedelta
+import random
 
 
 # Create your views here.
@@ -12,7 +13,21 @@ def index(request):
     shellsort = []
     quicksort = []
     contex = None
-    if request.method == "POST":
+    if request.method == "POST" and 'hello' in request.POST:
+        None
+        # str_rnd = ''
+        # for i in range(0, random.randint(3, 12)):
+        #     str_rnd += str(random.randint(0, 100)) + ' '
+        #     if random.randint(0, 1) == 1:
+        #         str_rnd = str_rnd[0:-1]
+        #         str_rnd += '\n'
+        # str_rnd = str_rnd[0:-1]
+        # contex = {
+        #     'random': str_rnd,
+        # }
+        #
+        # return render(request, 'lab1.html', contex)
+    elif request.method == "POST":
         mobile_number = request.POST.get('inputarray')
 
         mobile_number = mobile_number.split('\r\n')
