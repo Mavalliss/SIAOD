@@ -1,9 +1,8 @@
-from datetime import datetime
+
 import random
 
 
 def Shell(seq):
-    start_time = datetime.now()
     inc = len(seq) // 2
     while inc:
         for i, el in enumerate(seq):
@@ -12,8 +11,6 @@ def Shell(seq):
                 i -= inc
             seq[i] = el
         inc = 1 if inc == 2 else int(inc * 5.0 / 11)
-    end_time = datetime.now()
-    print('Duration: {}'.format(end_time - start_time))
 
     return seq
 

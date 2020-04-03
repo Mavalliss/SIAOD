@@ -1,0 +1,30 @@
+<div class="col-66 offset-1">
+    <h1>Выходной массив: </h1>
+    {% for j in i %}
+    <div class="alert alert-info">
+        <div class="row">
+            <div class="col-900">
+                {% if j == 'd' %}
+                <b>Стандартная соритровка:</b><br>
+                {{ res_arr_sort|linebreaks }}
+                <b>Время затрачено:</b> {{ time_sort }}<br>
+                {% endif %}
+                {% if j == 's' %}<!-- если q, то shellsort(почему - без понятия)-->
+                <b>Исходный массив:</b><br>
+                {{ main_arr|linebreaks }}
+                <b>Shellsort:</b><br>
+                {{ res_arr_shell|linebreaks }}
+                <b>Время затрачено:</b> {{ time_shell }}<br>
+                {% endif %}
+                {% if j == 'q' %}
+                <b>Исходный массив:</b><br>
+                {{ main_arr|linebreaks }}
+                <b>QuickSort:</b><br>
+                {{ res_arr_quick|linebreaks }}
+                <b>Время затрачено:</b> {{ time_quick }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
