@@ -1,4 +1,3 @@
-
 import random
 
 
@@ -63,7 +62,6 @@ def quickSort(nums):
 
 def join(string):
     return ''.join(map(str, string)).replace('][', '\n').replace('[', '').replace(']', '')
-
 
 # data = [22, 7, 2, -5, 8, 4]
 # new = quicksort(data)

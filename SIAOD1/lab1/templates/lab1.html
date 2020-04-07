@@ -27,14 +27,11 @@ for (var i = 0; i < getRandomInt(20); i++) {
 randomstr = randomstr.slice(0, -1)
 document.getElementById('txtIn').innerHTML = randomstr
 }
-
-
-
 </script>
 <div class="container mt-5">
     <div class="row">
         <div class="col-5">
-            <h1>Входной массив</h1>
+            <h1>Входной массив:</h1>
             <form action="" method="post">
                 {% csrf_token %}
                 <textarea id="txtIn" class="form-control" cols="50" rows="10" name="inputarray"

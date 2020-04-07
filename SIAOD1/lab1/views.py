@@ -58,7 +58,7 @@ def index(request):
         mainArr = join(mainArr)
         shellsort = join(shellsort)
         quicksort = join(quicksort)
-
+        # timeArr = mainArr
         contex = {
             'main_arr': mainArr,
             'res_arr_shell': shellsort,
@@ -70,7 +70,7 @@ def index(request):
             'time_all': alltime,
             'i': {'s', 'q', 'd'},
             'only_time': onlyTime,
+            # 'time_arr': timeArr,
         }
 
-    # return render(request, 'mainApp/index.html', contex)
     return render(request, 'lab1.html', contex)

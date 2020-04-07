@@ -1,4 +1,68 @@
 {% extends "mainApp/index.html" %}
 {% block content %}
+<script>
+    function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+function readFile(object) {
+var file = object.files[0]
+var reader = new FileReader()
+reader.onload = function() {
+    document.getElementById('txtIn').innerHTML = reader.result
+}
+reader.readAsText(file)
+}
 
+function randomMe() {
+var randomstr = ""
+for (var i = 0; i < getRandomInt(20); i++) {
+    for (var j = 0; j < getRandomInt(10); j++) {
+        randomstr += getRandomInt(100) + " "
+    }
+}
+randomstr = randomstr.slice(0, -1)
+document.getElementById('txtIn').value = randomstr
+}
+
+function compareNumbers(a, b) {
+    return a - b;
+}
+function SortMe() {
+var res = ""
+var arr = document.getElementById('txtIn').value
+arr = arr.split(' ')
+arr.sort(compareNumbers)
+for (var i = 0; i < arr.length; i++) {
+    res += arr[i] + " "
+}
+res = res.slice(0, -1)
+document.getElementById('txtIn').value = res
+}
+</script>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-5">
+            <h1>Входной массив:</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <input id="txtIn" class="form-control" name="inputarray" placeholder="Введите массив">{{ random }}</input>
+                <input class="mt-2 btn btn-danger" type="button" name="send" value="Добавить" onclick="SortMe()">
+                <aa class="mt-2 btn btn-primary" name="random" value="Рандом" type="submit" onclick="randomMe()">Рандом
+                </aa>
+            </form>
+            <br>
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="fileIn">
+                    <label class="custom-file-label" for="fileIn">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" onclick="readFile(document.getElementById('fileIn'));">Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 {% endblock %}
