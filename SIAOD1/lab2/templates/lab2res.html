@@ -1,0 +1,24 @@
+<div class="col-66 offset-1">
+    <h1>Результат: </h1>
+    <div class="alert alert-info">
+        <div class="row">
+            <div class="col-1800">
+                {% if show_all == False %}
+                <b>Исходный массив:</b><br>
+                {{ main_arr|linebreaks }}
+                {% else %}
+                <script>document.getElementById('txtIn').value = '{{ main_arr|safe }}'</script>
+                {% endif %}
+                {% if res == -1 %}
+                <b>Символ {{ key }} не был обнаружен.</b><br>
+                {% else %}
+                <b>Символ {{ key }} был на {{ place }} месте:</b><br>
+                {% endif %}
+                <b>Время затрачено:</b> {{ time_shell }} <br><br>
+                <b>Стандартная соритровка:</b><br>
+                <b>Время затрачено:</b> {{ time_sort }} <br><br>
+                <b>Общее время:</b> {{ time_all }}<br>
+            </div>
+        </div>
+    </div>
+</div>

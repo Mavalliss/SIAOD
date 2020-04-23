@@ -1,42 +1,47 @@
 {% extends "mainApp/index.html" %}
 {% block content %}
 <script>
-    function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
 }
 function readFile(object) {
-var file = object.files[0]
-var reader = new FileReader()
-reader.onload = function() {
-    document.getElementById('txtIn').innerHTML = reader.result
-}
-reader.readAsText(file)
+    var file = object.files[0]
+    var reader = new FileReader()
+    reader.onload = function() {
+        document.getElementById('txtIn').innerHTML = reader.result
+    }
+    reader.readAsText(file)
 }
 
 function randomMe() {
-var randomstr = ""
-for (var i = 0; i < getRandomInt(20); i++) {
-    for (var j = 0; j < getRandomInt(10); j++) {
-        randomstr += getRandomInt(100) + " "
+    var randomstr = ""
+    for (var i = 0; i < getRandomInt(20); i++) {
+        for (var j = 0; j < getRandomInt(10); j++) {
+            randomstr += getRandomInt(100) + " "
+        }
     }
-}
-randomstr = randomstr.slice(0, -1)
-document.getElementById('txtIn').value = randomstr
+    randomstr = randomstr.slice(0, -1)
+    document.getElementById('txtIn').value = randomstr
+    SortMe()
 }
 
 function compareNumbers(a, b) {
     return a - b;
 }
 function SortMe() {
-var res = ""
-var arr = document.getElementById('txtIn').value
-arr = arr.split(' ')
-arr.sort(compareNumbers)
-for (var i = 0; i < arr.length; i++) {
-    res += arr[i] + " "
-}
-res = res.slice(0, -1)
-document.getElementById('txtIn').value = res
+    var res = ""
+    var arr = document.getElementById('txtIn').value
+    arr = arr.replace(/, /g, " ")
+    document.getElementById('txtIn').value = arr
+    arr = arr.split(' ')
+    arr.sort(compareNumbers)
+    for (var i = 0; i < arr.length; i++) {
+        res += arr[i] + " "
+    }
+    res = res.slice(0, -1)
+    res = res.replace(/  /g, " ")
+    res = res.replace(/^\s*(.*)\s*$/, '$1')
+    document.getElementById('txtIn').value = res
 }
 </script>
 <div class="container mt-5">
@@ -46,9 +51,15 @@ document.getElementById('txtIn').value = res
             <form action="" method="post">
                 {% csrf_token %}
                 <input id="txtIn" class="form-control" name="inputarray" placeholder="Введите массив">{{ random }}</input>
-                <input class="mt-2 btn btn-danger" type="button" name="send" value="Добавить" onclick="SortMe()">
-                <aa class="mt-2 btn btn-primary" name="random" value="Рандом" type="submit" onclick="randomMe()">Рандом
+                <input id="charIn" class="mt-2 col-2 form-control" name="inputchar"
+                       title="Введите число для поиска">{{ random }}</input>
+                <input class="btn btn-danger" type="submit" name="send" value="Добавить"onclick="SortMe()">
+                <aa class="btn btn-primary" name="random" value="Рандом" type="submit" onclick="randomMe()">Рандом
                 </aa>
+                <div class="mt-2 btn">
+                    <input type="checkbox" id="noShow" name="checkbox" checked>
+                    <label for="noShow">Только время</label>
+                </div>
             </form>
             <br>
             <div class="input-group mb-3">
@@ -62,7 +73,9 @@ document.getElementById('txtIn').value = res
                 </div>
             </div>
         </div>
-
+        {% if short == 'true' %}
+        {% include 'lab2res.html' %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -1,35 +1,21 @@
-# интерполяционный поиск
 def InterpolSearch(A, key):
     __N = len(A)
 
-    mid = 0
-    left = 0
-    right = __N - 1
-    while A[left] <= key <= A[right]:
-        mid = left + ((key - A[left]) * (right - left)) / A[right] - A[left]
-        mid = int(mid)
-        if A[mid] < key:
-            left = mid + 1
-        elif A[mid] > key:
-            right = mid - 1
-        else:
+    x0 = 0
+    right = (len(A) - 1)
+    while x0 <= right and A[x0] <= key <= A[right]:
+
+        # средняя точка
+        mid = x0 + int(((float(right - x0) / (A[right] - A[x0])) * (key - A[x0])))
+
+        # Проверим, мб наше число в середине
+        if A[mid] == key:
             return mid
 
-        if A[left] == key:
-            return left
-        else:
-            return -1
+        if A[mid] < key:
+            x0 = mid + 1
+    return -1
 
 
-# i = 0
-# A = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
-# key = int(input("Искомый элемент: "))
-# print("Исходный массив: ", end='')
-# for i in range(0, 17):
-#     print(str(A[i]) + ' ', end='')
-# if InterpolSearch(key) == -1:
-#     print("\nЭлемент не найден")
-# else:
-#     print("\nНомер элемента: " + str(int(InterpolSearch(key)) + 1))
-
-# print(InterpolSearch(A, 2))
+# A = [2, 3, 5, 6, 6, 7, 7, 8, 12, 16, 21, 24, 26, 26, 42, 43, 49, 51, 57, 67, 68, 71, 72, 73, 74, 77, 79, 84, 87]
+# print(InterpolSearch(A, 8888))
