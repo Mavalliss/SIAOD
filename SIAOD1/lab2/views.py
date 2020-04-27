@@ -22,14 +22,23 @@ def index(request):
         key = request.POST.get("inputchar")
         mobile_number = [int(i) for i in mobile_number.split(' ')]
 
-        start_time = datetime.now()  # ПОИСК
-        start_timeShell = time.monotonic()
+        start_timee = datetime.now()  # Общее время
+        start_timeShell = time.monotonic()  # ПОИСК
         mobile_number.sort()
         res = InterpolSearch(mobile_number, int(key))
         end_timeShell = time.monotonic()
-        timeShell = timedelta(seconds=end_timeShell - start_timeShell)
-        print(mobile_number)
-        std = mobile_number
+        timeInterpol = timedelta(seconds=end_timeShell - start_timeShell)
+
+        start_time = datetime.now()  # ПОИСК
+        start_timeStd = time.monotonic()
+        try:
+            resStd = std.index(key)
+        except: var = None
+        end_timeStd = time.monotonic()
+        timeStd = timedelta(seconds=end_timeStd - start_timeStd)
+
+        end_timee = datetime.now()
+        alltime = '{}'.format(end_timee - start_timee)
 
         arr = ', '.join(map(str, mobile_number))
         short = 'true'
@@ -39,8 +48,10 @@ def index(request):
             'res': res,
             'place': res + 1,
             'key': str(key),
-            'time_shell': timeShell,
-            'show_all': len(mobile_number) > 23,
+            'time_interpol': timeInterpol,
+            'time_std': timeStd,
+            'time_all': alltime,
+            'show_all': True,
         }
 
     return render(request, 'lab2.html', contex)

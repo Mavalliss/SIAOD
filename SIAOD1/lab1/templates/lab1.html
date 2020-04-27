@@ -12,7 +12,11 @@ function getRandomInt(max) {
     }
     reader.readAsText(file)
 }
-
+function SortMe() {
+    res = res.slice(0, -1)
+    res = res.replace(/  /g, " ")
+    res = res.replace(/^\s*(.*)\s*$/, '$1')
+}
 function randomMe() {
 var randomstr = ""
 for (var i = 0; i < getRandomInt(20); i++) {
@@ -26,6 +30,7 @@ for (var i = 0; i < getRandomInt(20); i++) {
 }
 randomstr = randomstr.slice(0, -1)
 document.getElementById('txtIn').innerHTML = randomstr
+SortMe()
 }
 </script>
 <div class="container mt-5">

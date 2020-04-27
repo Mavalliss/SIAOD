@@ -1,6 +1,12 @@
 {% extends "mainApp/index.html" %}
 {% block content %}
 <script>
+window.onload = function() {
+    if (document.getElementById('txtIn').value == "")
+        document.getElementById("clear").style.display="none";
+    else
+        document.getElementById("clear").style.display="block";
+};
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
@@ -8,16 +14,17 @@ function readFile(object) {
     var file = object.files[0]
     var reader = new FileReader()
     reader.onload = function() {
-        document.getElementById('txtIn').innerHTML = reader.result
+        document.getElementById('txtIn').value = reader.result
     }
     reader.readAsText(file)
+    document.getElementById("clear").style.display="block";
 }
 
 function randomMe() {
     var randomstr = ""
-    for (var i = 0; i < getRandomInt(20); i++) {
-        for (var j = 0; j < getRandomInt(10); j++) {
-            randomstr += getRandomInt(100) + " "
+    for (var i = 0; i < getRandomInt(100); i++) {
+        for (var j = 0; j < getRandomInt(100); j++) {
+            randomstr += getRandomInt(1000) + " "
         }
     }
     randomstr = randomstr.slice(0, -1)
@@ -38,10 +45,17 @@ function SortMe() {
     for (var i = 0; i < arr.length; i++) {
         res += arr[i] + " "
     }
+    res = res.replace(/,/g, " ")
     res = res.slice(0, -1)
     res = res.replace(/  /g, " ")
     res = res.replace(/^\s*(.*)\s*$/, '$1')
     document.getElementById('txtIn').value = res
+    document.getElementById("clear").style.display="block";
+}
+function ClearAll() {
+    document.getElementById('txtIn').value = ""
+    document.getElementById('charIn').value = ""
+    document.getElementById("clear").style.display="none";
 }
 </script>
 <div class="container mt-5">
@@ -51,9 +65,12 @@ function SortMe() {
             <form action="" method="post">
                 {% csrf_token %}
                 <input id="txtIn" class="form-control" name="inputarray" placeholder="Введите массив">{{ random }}</input>
-                <input id="charIn" class="mt-2 col-2 form-control" name="inputchar"
-                       title="Введите число для поиска">{{ random }}</input>
-                <input class="btn btn-danger" type="submit" name="send" value="Добавить"onclick="SortMe()">
+                <div class="input-group">
+                    <input id="charIn" class="mt-2 col-2 form-control" name="inputchar"
+                           title="Введите число для поиска">{{ random }}</input>
+                    <input class="ml-2 mt-2 btn btn-info" id="clear" name="removeAll" type="button" value="Очистить поля" onclick="ClearAll()">
+                </div>
+                <input class="btn btn-danger" type="submit" name="send" value="Найти" onclick="SortMe()">
                 <aa class="btn btn-primary" name="random" value="Рандом" type="submit" onclick="randomMe()">Рандом
                 </aa>
                 <div class="mt-2 btn">
