@@ -1,71 +1,40 @@
 {% extends "mainApp/index.html" %}
 {% block content %}
-<script>
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
-    function readFile(object) {
-    var file = object.files[0]
-    var reader = new FileReader()
-    reader.onload = function() {
-        document.getElementById('txtIn').innerHTML = reader.result
-    }
-    reader.readAsText(file)
-}
-function SortMe() {
-    res = res.slice(0, -1)
-    res = res.replace(/  /g, " ")
-    res = res.replace(/^\s*(.*)\s*$/, '$1')
-}
-function randomMe() {
-var randomstr = ""
-for (var i = 0; i < getRandomInt(20); i++) {
-    for (var j = 0; j < getRandomInt(10); j++) {
-        randomstr += getRandomInt(100) + " "
-    }
-    if (getRandomInt(1) == 0) {
-        randomstr = randomstr.slice(0, -1)
-        randomstr += "\n"
-    }
-}
-randomstr = randomstr.slice(0, -1)
-document.getElementById('txtIn').innerHTML = randomstr
-SortMe()
-}
-</script>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-5">
-            <h1>Входной массив:</h1>
-            <form action="" method="post">
-                {% csrf_token %}
-                <textarea id="txtIn" class="form-control" cols="50" rows="10" name="inputarray"
-                          placeholder="Введите массив">{{ random }}</textarea>
-                <input class="btn btn-danger" type="submit" name="send" value="Добавить">
-                <aa class="btn btn-primary" name="hello" value="Рандом" type="submit" onclick="randomMe()">Рандом
-                </aa>
-                <div class="mt-2 btn">
-                    <input type="checkbox" id="noShow" name="checkbox" checked>
-                    <label for="noShow">Только время</label>
-                </div>
-            </form>
-            <br>
-            <div class="input-group mb-3">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="fileIn">
-                    <label class="custom-file-label" for="fileIn">Choose file</label>
-                </div>
-                <div class="input-group-append">
-                    <button class="btn btn-primary" onclick="readFile(document.getElementById('fileIn'));">Upload
-                    </button>
+    {% load static %}
+    <script src="{% static "scriptslab1.js" %}"></script>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-5">
+                <h1>Входной массив:</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <textarea id="txtIn" class="form-control" cols="50" rows="10" name="inputarray"
+                              placeholder="Введите массив">{{ random }}</textarea>
+                    <input class="btn btn-danger" type="submit" name="send" value="Добавить">
+                    <aa class="btn btn-primary" name="hello" value="Рандом" type="submit" onclick="randomMe()">Рандом
+                    </aa>
+                    <div class="mt-2 btn">
+                        <input type="checkbox" id="noShow" name="checkbox" checked>
+                        <label for="noShow">Только время</label>
+                    </div>
+                </form>
+                <br>
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="fileIn">
+                        <label class="custom-file-label" for="fileIn">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" onclick="readFile(document.getElementById('fileIn'));">Upload
+                        </button>
+                    </div>
                 </div>
             </div>
+            {% if only_time == 'on' %}
+                {% include 'lab1time.html' %}
+            {% else %}
+                {% include 'lab1mass.html' %}
+            {% endif %}
         </div>
-        {% if only_time == 'on' %}
-        {% include 'lab1time.html' %}
-        {% else %}
-        {% include 'lab1mass.html' %}
-        {% endif %}
     </div>
-</div>
 {% endblock %}

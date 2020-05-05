@@ -119,5 +119,11 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    os.path.join("lab1", 'templates'),
+    os.path.join("lab2", 'templates'),
+    os.path.join("lab3", 'templates'),
     '/SIAOD1/static',
+    'SIAOD1/lab1/templates',
+    'SIAOD1/lab2/templates',
+    'SIAOD1/lab3/templates',
 ]
