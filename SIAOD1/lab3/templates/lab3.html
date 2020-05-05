@@ -58,7 +58,7 @@
 
         function ClearAll() {
             document.getElementById('txtIn').value = ""
-            document.getElementById('charIn').value = ""
+            document.getElementById('txtInSub').value = ""
             document.getElementById("clear").style.display = "none";
         }
     </script>
@@ -68,20 +68,22 @@
                 <h1>Входной массив:</h1>
                 <form action="" method="post">
                     {% csrf_token %}
-                    <input id="txtIn" class="form-control" name="inputarray"
-                           placeholder="Введите массив">{{ random }}</input>
-                    <div class="input-group">
-                        <input id="charIn" class="mt-2 col-2 form-control" name="inputchar"
-                               title="Введите число для поиска">{{ random }}</input>
-                        <input class="ml-2 mt-2 btn btn-info" id="clear" name="removeAll" type="button"
-                               value="Очистить поля" onclick="ClearAll()">
-                    </div>
-                    <input class="btn btn-danger" type="submit" name="send" value="Найти" onclick="SortMe()">
-                    <aa class="btn btn-primary" name="random" value="Рандом" type="submit" onclick="randomMe()">Рандом
-                    </aa>
-                    <div class="mt-2 btn">
-                        <input type="checkbox" id="noShow" name="checkbox" checked>
-                        <label for="noShow">Только время</label>
+                    <textarea id="txtIn" class="form-control" name="inputarray" placeholder="Введите строку"
+                              rows="1">{{ random }}</textarea>
+                    <textarea id="txtInSub" class="mt-2 form-control" name="inputsubstring"
+                              placeholder="Введите подстроку" rows="1">{{ random }}</textarea>
+
+                    <div class="mt-2 lel">
+                        <button class="mr-1 btn btn-danger" type="submit" name="send" onclick="SortMe()">Найти</button>
+                        <aa class="mr-1 btn btn-primary" name="random" value="Рандом" type="submit"
+                            onclick="randomMe()">Рандом
+                        </aa>
+                        <input class="mr-1 btn btn-info" id="clear" type="button" name="removeAll" onclick="ClearAll()"
+                               value="Очистить поля">
+                        <div class="mt-2">
+                            <input type="checkbox" id="noShow" name="checkbox" checked>
+                            <label for="noShow">Только время</label>
+                        </div>
                     </div>
                 </form>
                 <br>
@@ -96,9 +98,6 @@
                     </div>
                 </div>
             </div>
-            {% if short == 'true' %}
-                {% include 'lab2res.html' %}
-            {% endif %}
         </div>
     </div>
 {% endblock %}

@@ -6,6 +6,7 @@ import time
 
 # Create your views here.
 
+
 def join(string):
     return ''.join(map(str, string)).replace('][', '\n').replace('[', '').replace(']', '')
 
